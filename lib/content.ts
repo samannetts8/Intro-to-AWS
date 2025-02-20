@@ -1,3 +1,4 @@
+
 export type MediaContent = {
   type: 'image' | 'video';
   url: string;
@@ -8,14 +9,20 @@ export type Section = {
   id: string;
   title: string;
   content: string;
+  content_2?: string;
+  content_3?: string;
+  content_4?: string;
   media?: MediaContent[];
+  content_order?: string[];
 };
 
 export const sections: Section[] = [
   {
-    id: 'introduction',
-    title: 'Introduction',
-    content: `Welcome to our comprehensive documentation. This guide will help you understand our platform and get started quickly.
+    id: 'Background',
+    title: 'Bit of Background 📃',
+    content: `Amazon Web Services (AWS) is the world’s leading cloud platform, offering a vast range of tools to build, host, and scale applications without needing to manage physical infrastructure.`,
+    content_2: `- `,
+    content_3: `Amazon Wefasdfasdftools to build, host, and scale applications without needing to manage physical infrastructure.
 
     Our platform is designed with simplicity and power in mind, making it accessible for beginners while providing advanced features for experienced users.`,
     media: [
@@ -24,7 +31,8 @@ export const sections: Section[] = [
         url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
         caption: 'Modern development environment'
       }
-    ]
+    ],
+    content_order: ['content', 'content_2', 'content_3','media']
   },
   {
     id: 'getting-started',

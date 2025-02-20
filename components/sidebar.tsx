@@ -67,8 +67,8 @@ export function Sidebar() {
         )}
       >
         <div className="p-4 border-b">
-          <Link href="/" className="text-xl font-semibold hover:text-primary">
-            Contents
+          <Link href="/" className="text-3xl font-semibold hover:text-primary">
+            Content:
           </Link>
         </div>
         <nav className="p-4 h-[calc(100vh-4rem)] overflow-y-auto">
