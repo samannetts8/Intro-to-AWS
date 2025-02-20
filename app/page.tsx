@@ -5,7 +5,7 @@ const ContentSection = ({ section = {} }) => {
   // Early return if section is not provided
   if (!section || !section.content_order) {
     return (
-      <div className="p-4 text-muted-foreground">No content available</div>
+      <div className="p-4 text-muted-foreground italic">Content coming soon!</div>
     );
   }
 
@@ -39,11 +39,14 @@ const ContentSection = ({ section = {} }) => {
                 className="w-full h-auto"
               />
             ) : (
-              <video
-                src={media.url}
-                controls
-                className="w-full"
-                poster="/video-placeholder.jpg"
+              <iframe
+              src={media.url}
+              title={media.caption || "Video"}
+              className="w-full h-64" // Set the height and width here
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+
               />
             )}
             {media.caption && (

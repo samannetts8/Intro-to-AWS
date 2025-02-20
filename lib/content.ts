@@ -21,32 +21,27 @@ export const sections: Section[] = [
     id: 'Background',
     title: 'Bit of Background 📃',
     content: `Amazon Web Services (AWS) is the world’s leading cloud platform, offering a vast range of tools to build, host, and scale applications without needing to manage physical infrastructure.`,
-    content_2: `- `,
-    content_3: `Amazon Wefasdfasdftools to build, host, and scale applications without needing to manage physical infrastructure.
-
-    Our platform is designed with simplicity and power in mind, making it accessible for beginners while providing advanced features for experienced users.`,
+    content_2: `Before we dive into the nuts and bolts of AWS deployment, let’s take a step back and look at how we got here. Once upon a time, deploying an application meant buying physical servers, setting them up in a data center, and praying they wouldn’t crash under load. Then came the cloud—offering virtual servers, scalable infrastructure, and the ability to deploy applications from anywhere. AWS led the charge, and today, it powers everything from tiny side projects to the world’s biggest tech giants.`,
     media: [
       {
         type: 'image',
-        url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085',
-        caption: 'Modern development environment'
+        url: '/assets/imgs/aws_services.png',
+        caption: 'List of AWS services'
       }
     ],
-    content_order: ['content', 'content_2', 'content_3','media']
+    content_order: ['content','media', 'content_2', 'content_3']
   },
   {
-    id: 'getting-started',
+    id: 'SetUp',
     title: 'Getting Started',
-    content: `Let's begin with the basics. This section will guide you through the initial setup process and core concepts.
-
-    Follow our step-by-step guide to ensure a smooth onboarding experience. We'll cover everything from account creation to basic configuration.`,
+    content: ``,
     media: [
       {
         type: 'video',
-        url: 'https://example.com/getting-started-guide.mp4',
+        url: 'https://www.youtube.com/embed/JIbIYCM48to',
         caption: 'Quick start guide'
       }
-    ]
+    ],content_order: ['content','media', 'content_2', 'content_3']
   },
   {
     id: 'features',

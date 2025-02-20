@@ -80,3 +80,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+img {
+  border-radius: 12px;
+}
