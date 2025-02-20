@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { sections } from '@/lib/content';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('');
+  const pathname = usePathname();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -20,6 +23,7 @@ export function Sidebar() {
       },
       {
         rootMargin: '-20% 0px -80% 0px',
+        threshold: 0.1
       }
     );
 
@@ -34,7 +38,7 @@ export function Sidebar() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setIsOpen(false);
     }
   };
@@ -42,7 +46,7 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile Header */}
-      <div className="lg:hidden flex items-center justify-between p-4 border-b">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-background flex items-center justify-between p-4 border-b">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 hover:bg-secondary rounded-md"
@@ -55,32 +59,41 @@ export function Sidebar() {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed top-0 left-0 h-full bg-background border-r w-64 transform transition-transform duration-200 ease-in-out z-50",
+          "fixed top-0 left-0 h-full bg-background border-r w-64 transform transition-transform duration-200 ease-in-out z-50 lg:translate-x-0",
           {
-            "-translate-x-full lg:translate-x-0": !isOpen,
-            "translate-x-0": isOpen
+            "-translate-x-full": !isOpen && !pathname.includes('/'),
+            "translate-x-0": isOpen || pathname.includes('/')
           }
         )}
       >
         <div className="p-4 border-b">
-          <h2 className="text-xl font-semibold">Contents</h2>
+          <Link href="/" className="text-xl font-semibold hover:text-primary">
+            Contents
+          </Link>
         </div>
-        <nav className="p-4">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={cn(
-                "block w-full text-left px-4 py-2 rounded-md mb-2 transition-colors",
-                activeSection === section.id
-                  ? "bg-primary text-primary-foreground"
-                  : "hover:bg-secondary"
-              )}
-            >
-              {section.title}
-            </button>
-          ))}
+        <nav className="p-4 h-[calc(100vh-4rem)] overflow-y-auto">
+          <div className="space-y-2">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
+                className={cn(
+                  "block w-full text-left px-4 py-2 rounded-md transition-colors",
+                  activeSection === section.id
+                    ? "bg-primary text-primary-foreground"
+                    : "hover:bg-secondary"
+                )}
+              >
+                {section.title}
+              </button>
+            ))}
+          </div>
         </nav>
+      </div>
+
+      {/* Main Content Wrapper */}
+      <div className="lg:pl-64">
+        <div className="lg:hidden h-16" /> {/* Mobile header spacing */}
       </div>
 
       {/* Overlay */}
