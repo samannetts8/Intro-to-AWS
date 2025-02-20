@@ -25,28 +25,27 @@ const ContentSection = ({ section = {} }) => {
   };
 
   // Helper function to render media section
-  const renderMedia = () => {
-    if (!section.media || section.media.length === 0) return null;
+  const renderMedia = (mediaArray) => {
+    if (!mediaArray || mediaArray.length === 0) return null;
 
     return (
       <div className="space-y-6">
-        {section.media.map((media, index) => (
-          <div key={index} className="rounded-lg overflow-hidden">
+        {mediaArray.map((media, index) => (
+          <div key={index} className="flex flex-col items-center rounded-lg overflow-hidden">
             {media.type === "image" ? (
               <img
                 src={media.url}
                 alt={media.caption || ""}
-                className="w-full h-auto"
+                className="w-full h-auto max-w-lg max-h-96"
               />
             ) : (
               <iframe
-              src={media.url}
-              title={media.caption || "Video"}
-              className="w-full h-64" // Set the height and width here
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-
+                src={media.url}
+                title={media.caption || "Video"}
+                className="w-full h-64"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             )}
             {media.caption && (
@@ -64,7 +63,9 @@ const ContentSection = ({ section = {} }) => {
     <div>
       {section.content_order.map((contentKey) => (
         <React.Fragment key={contentKey}>
-          {contentKey === "media" ? renderMedia() : renderContent(contentKey)}
+          {contentKey === "media" ? renderMedia(section.media) : null}
+          {contentKey === "media_2" ? renderMedia(section.media_2) : null}
+          {contentKey !== "media" && contentKey !== "media_2" ? renderContent(contentKey) : null}
         </React.Fragment>
       ))}
     </div>
