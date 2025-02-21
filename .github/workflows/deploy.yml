@@ -30,5 +30,4 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          # Replace `your-app-name` and `your-environment-name` with your actual app and environment names
           aws elasticbeanstalk update-environment --application-name abcs-of-aws --environment-name Abcs-of-aws-env --version-label ${{ github.sha }}
