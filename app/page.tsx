@@ -13,6 +13,7 @@ const ContentSection = ({ section = {} }) => {
   const renderContent = (contentKey) => {
     if (!section[contentKey]) return null;
 
+
     return (
       <div className="bg-card rounded-lg p-6 shadow-sm mb-6">
         {section[contentKey].split("\n\n").map((paragraph, index) => (
@@ -23,6 +24,8 @@ const ContentSection = ({ section = {} }) => {
       </div>
     );
   };
+  
+  
 
   // Helper function to render media section
   const renderMedia = (mediaArray) => {
@@ -63,10 +66,8 @@ const ContentSection = ({ section = {} }) => {
     <div>
       {section.content_order.map((contentKey) => (
         <React.Fragment key={contentKey}>
-          {contentKey === "media" ? renderMedia(section.media) : null}
-          {contentKey === "media_2" ? renderMedia(section.media_2) : null}
-          {contentKey !== "media" && contentKey !== "media_2" ? renderContent(contentKey) : null}
-        </React.Fragment>
+          {contentKey.startsWith("media") ? renderMedia(section[contentKey]) : renderContent(contentKey)}
+          </React.Fragment>
       ))}
     </div>
   );
@@ -97,7 +98,7 @@ export default function Home() {
                 <br />
                 ➡️ A Docker Container
                 <br/>
-                ➡️ Pushing a repo from GitHub
+                ➡️ A Repository from GitHub
                 <br/>
                 ➡️ Uploading to AWS Elastic Beanstalk
                 <br/> <br/>
