@@ -1,7 +1,14 @@
 import React, { Fragment } from "react";
-import { sections } from "@/lib/content";
+import { sections, Section, SectionId } from "@/lib/content";
 
-const ContentSection = ({ section = {} }) => {
+// Define the correct props type for the page component
+type PageProps = {
+  params: {
+    sectionId: string;
+  };
+};
+
+const ContentSection = ({ section = {} as Section }) => {
   // Early return if section is not provided
   if (!section || !section.content_order) {
     return (
@@ -10,13 +17,12 @@ const ContentSection = ({ section = {} }) => {
   }
 
   // Helper function to render content blocks
-  const renderContent = (contentKey) => {
+  const renderContent = (contentKey: keyof Section) => {
     if (!section[contentKey]) return null;
-
 
     return (
       <div className="bg-card rounded-lg p-6 shadow-sm mb-6">
-        {section[contentKey].split("\n\n").map((paragraph, index) => (
+        {(section[contentKey] as string).split("\n\n").map((paragraph, index) => (
           <p key={index} className="mb-4 last:mb-0">
             {paragraph}
           </p>
@@ -24,11 +30,9 @@ const ContentSection = ({ section = {} }) => {
       </div>
     );
   };
-  
-  
 
   // Helper function to render media section
-  const renderMedia = (mediaArray) => {
+  const renderMedia = (mediaArray: Section['media']) => {
     if (!mediaArray || mediaArray.length === 0) return null;
 
     return (
@@ -66,14 +70,16 @@ const ContentSection = ({ section = {} }) => {
     <div>
       {section.content_order.map((contentKey) => (
         <React.Fragment key={contentKey}>
-          {contentKey.startsWith("media") ? renderMedia(section[contentKey]) : renderContent(contentKey)}
-          </React.Fragment>
+          {contentKey.startsWith("media") 
+            ? renderMedia(section[contentKey as keyof Section] as Section['media']) 
+            : renderContent(contentKey as keyof Section)}
+        </React.Fragment>
       ))}
     </div>
   );
 };
 
-export default function Home() {
+export default async function Page({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="lg:pl-64">
@@ -135,4 +141,11 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+// Generate static params for all possible section IDs
+export async function generateStaticParams() {
+  return sections.map((section) => ({
+    sectionId: section.id,
+  }));
 }
