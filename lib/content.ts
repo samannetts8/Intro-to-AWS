@@ -124,9 +124,9 @@ export const sections: Section[] = [
       content_order: ['content','media','content_2','media_2', 'content_3', 'content_4','content_5']
   },
   {
-    id: 'GitHub',
+    id: 'Environment',
     title: 'Going via GitHub',
-    content: `Now you're up and running on AWS, we can look at how to carry your project over to AWS. For this, you'll be using AWS Elastic Beanstalk. You can find this by just entering 'Elastic Beanstalk' into the top left search bar.\n\n
+    content: `Now you're up and running on AWS, we have to build the environment for you to deploy your application on. You have the opportunity to upload your codebase as a ZIP during if process if you'd like, but I would initialising your domain using AWS's template first, to allow for easier trouble shooting if required. \n\n
     `,
     media: [
       {
@@ -135,7 +135,7 @@ export const sections: Section[] = [
         caption: `When you're ready, click 'Create application'!`
       }
     ],
-    content_2: `Once you've begun to create your application, you'll have a total of 6 steps to complete before hosting your site. As we go, I'll be providing a simple explanation for each section, whilst also highlighting my choices used for a simple, personal project!\n\n
+    content_2: `For this process, you'll have a total of 6 steps to complete before hosting your site. As we go, I'll be providing a simple explanation for each section, whilst also highlighting my choices used for a simple, personal project!\n\n
     
     Step 1: Configure environment\n\n
       
@@ -152,7 +152,7 @@ export const sections: Section[] = [
     
     ⭐Application Code - \n\n
     The Application Code section defines how the application's source code is provided. This can be done by uploading a local file, selecting a previously deployed version, or linking to an external source.\n\n
-    My choice - Upload your code => you can access the required ZIP file through GitHub by navigating to the main page of the repository. Above the list of files, click [Code], and then just click [Download ZIP].\n\n
+    My choice - Sample application => If you're feeling bold, you can access the required ZIP file through GitHub by navigating to the main page of the repository. Above the list of files, click [Code], and then just click [Download ZIP].\n\n
     
     ⭐Presets - \n\n
     The Preset section in the AWS Elastic Beanstalk configuration process allows you to choose predefined environment configurations based on your needs. For small applications and development processes, a single instance will do the job. \n\n
@@ -169,7 +169,7 @@ export const sections: Section[] = [
 
     Step 3: Set up networking, database, and tags - OPTIONAL\n\n
 
-    This section allows you to configure how your EC2 instance connects to your network (VPC), any databases it might need access to, and add tags to organize and identify your resources.\n\n Fortunately, we get a helping hand from Amazon here where, if you don't configure a VPC when you launch your environment, Elastic Beanstalk uses the default VPC. This default will be more than sufficient for our simple web app purposes. Therefore, we can skip this page in the set up
+    This section allows you to configure how your EC2 instance connects to your network (VPC), any databases it might need access to, and add tags to organize and identify your resources.\n\n Fortunately, we get a helping hand from Amazon here where, if you don't configure a VPC when you launch your environment, Elastic Beanstalk uses the default VPC. This default will be more than sufficient for our simple web app purposes. Therefore, we can skip this page in the set up. \n\n
     
     Step 4: Configure instance traffic and scaling - OPTIONAL\n\n
 
@@ -191,8 +191,8 @@ export const sections: Section[] = [
     content_order: ['content','media','content_2','media_2', 'content_3']
   },
   {
-    id: 'best-practices',
-    title: 'Best Practices',
+    id: 'Docker',
+    title: 'Deploy with Docker 🐋',
     content: `Learn how to make the most of our platform with these recommended best practices and optimization tips.
 
     We've compiled these guidelines based on years of experience and feedback from our user community.`,
