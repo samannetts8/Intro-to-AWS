@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { sections, Section, SectionId } from "@/lib/content";
+import { Metadata } from "next";
 
-// Define the correct props type for the page component
-type Props = {
-  params: { sectionId: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface PageProps {
+  params: {
+    sectionId: string;
+  };
+}
 
 const ContentSection = ({ section = {} as Section }) => {
   // Early return if section is not provided
@@ -78,7 +79,7 @@ const ContentSection = ({ section = {} as Section }) => {
   );
 };
 
-export default function Page({ params, searchParams }: Props) {
+function Page({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main className="lg:pl-64">
@@ -142,7 +143,8 @@ export default function Page({ params, searchParams }: Props) {
   );
 }
 
-// Generate static params for all possible section IDs
+export default Page;
+
 export function generateStaticParams() {
   return sections.map((section) => ({
     sectionId: section.id,
